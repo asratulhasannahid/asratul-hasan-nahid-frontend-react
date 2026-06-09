@@ -96,7 +96,7 @@ export default function Hero() {
           {/* Buttons */}
           <div
             id="hero-buttons-container"
-            className="animate-hero-buttons flex flex-wrap items-center gap-4 w-full sm:w-auto"
+            className="animate-hero-buttons flex flex-inline items-center gap-4 w-full sm:w-auto"
           >
             {/* Let's Connect Button */}
             <a
