@@ -75,7 +75,7 @@ export default function Hero() {
             className="animate-heading-up font-space text-5xl sm:text-5xl lg:text-[56px] xl:text-[72px] font-black text-gray-900 leading-[1.1] tracking-tight mb-6"
           >
             I Write{" "}
-            <span className="highlight-word animate-shimmer-code">Code</span>.
+            <span className="highlight-word animate-shimmer-code">Code.</span>
             Browsers Turn It Into{" "}
             <span className="highlight-word animate-shimmer-experience">
               Experience.

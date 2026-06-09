@@ -1,0 +1,108 @@
+/* 1. Entire Header Slide-Down on Page Load */
+@keyframes headerSlideDown {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.animate-header-slide-down {
+  animation: headerSlideDown 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 2. Logo Left Entrance (delay 0.3s) */
+@keyframes logoFadeInLeft {
+  0% {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+.animate-logo-fade-in {
+  opacity: 0;
+  animation: logoFadeInLeft 0.5s ease-out forwards;
+  animation-delay: 0.3s;
+}
+
+/* 3. Staggered Navigation Links Transitions (0.5s start, 0.05s increments) */
+@keyframes navItemFadeIn {
+  0% {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.animate-nav-item {
+  opacity: 0;
+  animation: navItemFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.nav-delay-0 {
+  animation-delay: 0.5s;
+}
+.nav-delay-1 {
+  animation-delay: 0.55s;
+}
+.nav-delay-2 {
+  animation-delay: 0.6s;
+}
+.nav-delay-3 {
+  animation-delay: 0.65s;
+}
+.nav-delay-4 {
+  animation-delay: 0.7s;
+}
+
+/* 4. Action Buttons Right Entrance (delay 0.7s) */
+@keyframes actionFadeInRight {
+  0% {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+.animate-actions-fade-in {
+  opacity: 0;
+  animation: actionFadeInRight 0.5s ease-out forwards;
+  animation-delay: 0.7s;
+}
+
+/* Underline slider effect */
+.underline-slider {
+  position: relative;
+}
+.underline-slider::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #5dbf8a;
+  transform-origin: bottom left;
+  transition: transform 0.3s ease;
+}
+.underline-slider:hover::after {
+  transform: scaleX(1);
+}
+
+@media (max-width: 1024px) {
+  #header-desktop-navigation {
+    display: none;
+  }
+  #header-right-actions {
+    display: none;
+  }
+}
