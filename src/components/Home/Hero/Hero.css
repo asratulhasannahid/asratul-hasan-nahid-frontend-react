@@ -1,0 +1,304 @@
+/* --- Ambient Blobs Slow Float --- */
+@keyframes floatBlobA {
+  0% {
+    transform: translateY(-20px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(20px) rotate(15deg);
+  }
+}
+@keyframes floatBlobB {
+  0% {
+    transform: translateY(20px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-20px) rotate(-15deg);
+  }
+}
+.bg-blob-1 {
+  animation: floatBlobA 7s ease-in-out infinite alternate;
+}
+.bg-blob-2 {
+  animation: floatBlobB 8s ease-in-out infinite alternate;
+}
+.bg-blob-3 {
+  animation: floatBlobA 6s ease-in-out infinite alternate-reverse;
+}
+
+/* --- Hero Badge Entrance --- */
+@keyframes fadeInTop {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-hero-badge {
+  animation: fadeInTop 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.1s;
+  opacity: 0;
+}
+
+/* --- Heading Main Slide-Up --- */
+@keyframes headingFadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-heading-up {
+  animation: headingFadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.2s;
+  opacity: 0;
+}
+
+/* --- Highlight Text Sweep/Shimmer --- */
+@keyframes shimmer-sweep {
+  0% {
+    background-position: 250% center;
+  }
+  100% {
+    background-position: -50% center;
+  }
+}
+.highlight-word {
+  background: linear-gradient(
+    90deg,
+    #55a57a 0%,
+    #55a57a 35%,
+    rgba(255, 255, 255, 0.9) 50%,
+    #5dbf8a 65%,
+    #5dbf8a 100%
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  display: inline-block;
+  font-weight: 900;
+}
+.animate-shimmer-code {
+  animation: shimmer-sweep 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  animation-delay: 0.8s; /* Plays after heading fade-in (0.2s + 0.6s build) */
+  background-position: 250% center;
+}
+.animate-shimmer-experience {
+  animation: shimmer-sweep 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  animation-delay: 1.2s; /* Plays after code shimmer */
+  background-position: 250% center;
+}
+
+/* --- Description Fade-In --- */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.animate-hero-description {
+  animation: fadeIn 1.2s ease-out forwards;
+  animation-delay: 0.4s;
+  opacity: 0;
+}
+
+/* --- Buttons Scale-Up --- */
+@keyframes fadeInScaleUp {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.animate-hero-buttons {
+  animation: fadeInScaleUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.6s;
+  opacity: 0;
+}
+
+/* --- Right Column Entry --- */
+@keyframes fadeInRightColumn {
+  0% {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.animate-right-column {
+  animation: fadeInRightColumn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.3s;
+  opacity: 0;
+}
+
+/* --- Floating Avatar --- */
+@keyframes profileFloat {
+  0% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(10px);
+  }
+}
+.animate-profile-float {
+  animation: profileFloat 4s ease-in-out infinite alternate;
+}
+
+/* --- Profile Image Interactions --- */
+.profile-image-wrapper {
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s ease;
+}
+.profile-image-wrapper:hover {
+  transform: scale(1.04);
+  box-shadow:
+    0 20px 40px -5px rgba(93, 191, 138, 0.25),
+    0 0 30px 5px rgba(93, 191, 138, 0.12);
+}
+
+/* --- Decorative Rings Counter-Rotations --- */
+@keyframes spin-clockwise {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes spin-counter {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+.animate-spin-clockwise {
+  animation: spin-clockwise 14s linear infinite;
+}
+.animate-spin-counter {
+  animation: spin-counter 18s linear infinite;
+}
+
+/* --- Pulsing Radial Glow Behind Image --- */
+@keyframes glow-pulse {
+  0%,
+  100% {
+    opacity: 0.1;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 0.25;
+    transform: scale(1.05);
+  }
+}
+.animate-glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+/* --- Card Badge Enter & Hover --- */
+@keyframes cardBadgeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+.animate-card-badge {
+  animation: cardBadgeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.5s;
+  opacity: 0;
+}
+.card-badge-container {
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease;
+}
+.card-badge-container:hover {
+  transform: translate(-50%, -4px);
+  box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Hero Section Blurred Gradient Overlay --- */
+.hero-bg-blur {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+.hero-gradient-blob,
+.hero-ring-overlay {
+  position: absolute;
+  pointer-events: none;
+  filter: blur(100px);
+  opacity: 0.75;
+}
+.hero-gradient-blob {
+  top: -10%;
+  left: -8%;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 25% 25%,
+    rgba(93, 191, 138, 0.5),
+    rgba(93, 191, 138, 0.15) 35%,
+    transparent 70%
+  );
+  animation: hero-blob-drift 14s ease-in-out infinite alternate;
+}
+.hero-ring-overlay {
+  right: -14%;
+  bottom: -10%;
+  width: 420px;
+  height: 420px;
+  border-radius: 48% 52% 60% 40% / 45% 55% 40% 60%;
+  background: linear-gradient(
+    135deg,
+    rgba(93, 191, 138, 0.2),
+    rgba(93, 191, 138, 0.05)
+  );
+  opacity: 0.6;
+  filter: blur(120px);
+  animation: hero-ring-swell 18s ease-in-out infinite alternate-reverse;
+}
+@keyframes hero-blob-drift {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(18px, 24px) scale(1.07);
+  }
+}
+@keyframes hero-ring-swell {
+  0% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  100% {
+    transform: translate(-16px, -12px) rotate(14deg) scale(1.02);
+  }
+}
+
+@media (max-width: 767px) {
+  .left-margin-custom {
+    left: 97% !important;
+  }
+}
