@@ -104,7 +104,7 @@ export default function Hero() {
               href="#contact"
               className="group/btn relative px-8 py-3.5 rounded-full bg-gray-950  border-gray-950 text-[#ffffff] font-space text-[15px] font-bold border  shadow-[0_4px_14px_rgba(0,0,0,0.04)] hover:bg-[#5DBF8A] hover:text-white hover:border-[#5DBF8A] transition-all duration-300 flex items-center justify-center gap-3 overflow-hidden text-center min-w-[170px]"
             >
-              Let's Connect{" "}
+              Let's Talk{" "}
               <span className="text-base font-sans transition-transform duration-300 group-hover/btn:translate-x-1">
                 <ArrowRight size={15}></ArrowRight>
               </span>
