@@ -214,7 +214,7 @@ export default function Hero() {
 
                 {/* Info Text */}
                 <div id="card-badge-info" className="min-w-0 flex-1">
-                  <h4 className="font-space font-bold text-gray-900 text-[16px] leading-tight mb-0.5 truncate">
+                  <h4 className="font-space font-bold text-gray-900 text-[17px] leading-tight mb-0.5 truncate">
                     Asratul Hasan Nahid
                   </h4>
                   <p className="font-poppins text-[13px] text-gray-500 leading-tight truncate">
