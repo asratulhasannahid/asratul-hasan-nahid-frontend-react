@@ -195,7 +195,7 @@ export default function Stats() {
             />
 
             {/* Stat count */}
-            <div className="font-space font-bold text-5xl sm:text-6xl text-[#111827] mt-3 group-hover:text-[#5DBF8A] transition-colors duration-300 relative z-10">
+            <div className="font-space font-bold text-5xl sm:text-5xl text-[#111827] mt-3 group-hover:text-[#5DBF8A] transition-colors duration-300 relative z-10">
               {card.prefix && (
                 <span className="text-[#5DBF8A] group-hover:text-[#5DBF8A]/90 transition-colors duration-300">
                   {card.prefix}
