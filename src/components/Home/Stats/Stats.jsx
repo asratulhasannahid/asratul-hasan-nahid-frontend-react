@@ -207,11 +207,11 @@ export default function Stats() {
               </span>
             </div>
 
-            <p className="font-poppins font-semibold text-xs tracking-wider uppercase text-[#5DBF8A] mt-3 pb-2 border-b border-neutral-100 relative z-10">
+            <p className="font-poppins font-semibold text-[15px] tracking-wider uppercase text-[#5DBF8A] mt-3 pb-2 border-b border-neutral-100 relative z-10">
               {card.title}
             </p>
 
-            <p className="font-poppins font-light text-sm text-[#6B7280] mt-4 leading-relaxed relative z-10">
+            <p className="font-poppins font-light text-[15px] text-[#6B7280] mt-4 leading-relaxed relative z-10">
               {card.description}
             </p>
           </div>

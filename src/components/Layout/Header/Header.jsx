@@ -21,10 +21,10 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navItems = ["Home", "Aboub Me", "Expertise", "Projects", "Articles"];
+  const navItems = ["Home", "About Me", "Expertise", "Projects", "Articles"];
 
   return (
-    <header className="mb-8">
+    <header>
       <section
         id="portfolio-header"
         className={`fixed top-[12px] left-[20px] right-[20px] z-50 transition-all duration-300 max-w-7xl mx-auto animate-header-slide-down rounded-full ${
@@ -104,8 +104,8 @@ export default function Header() {
             {/* Let's Talk Button */}
             <a
               id="header-cta-button"
-              href="mailto:proniizam@gmail.com"
-              className="px-6 h-[46px] rounded-full bg-[#111827] text-white border border-[#111827] text-sm font-semibold font-poppins flex items-center justify-center gap-2.5 shadow-xs hover:shadow-md transition-all duration-300 hover:bg-[#5DBF8A] hover:text-white hover:border-[#5DBF8A] hover:scale-[1.02] cursor-pointer"
+              href="mailto:asratulhasannahid@gmail.com"
+              className="px-6 h-[46px] rounded-full bg-[#111827] text-white border border-[#111827] text-[16px] font-semibold font-poppins flex items-center justify-center gap-2.5 shadow-xs hover:shadow-md transition-all duration-300 hover:bg-[#5DBF8A] hover:text-white hover:border-[#5DBF8A] hover:scale-[1.02] cursor-pointer"
             >
               <span>Let's Talk</span>
               <ArrowRight size={15}></ArrowRight>
@@ -190,7 +190,7 @@ export default function Header() {
 
               {/* Mobile "Let's Talk" Button */}
               <a
-                href="mailto:proniizam@gmail.com"
+                href="mailto:asratulhasannahid@gmail.com"
                 className="flex-1 max-w-[200px] h-[46px] rounded-full bg-[#5DBF8A] text-white text-sm font-semibold font-poppins flex items-center justify-center gap-2 shadow-sm cursor-pointer"
               >
                 <span>Let's Talk</span>

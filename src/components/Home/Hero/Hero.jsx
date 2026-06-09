@@ -8,7 +8,7 @@ export default function Hero() {
   return (
     <section
       id="hero-section"
-      className="relative min-h-[90vh] lg:min-h-screen flex items-center px-6 py-20 lg:py-32 overflow-hidden bg-white"
+      className="relative min-h-[90vh] lg:min-h-screen flex items-center px-6 py-28 lg:py-32 overflow-hidden bg-white"
     >
       {/* Background Grid Overlay */}
       <div className="absolute inset-0 z-0 opacity-40">
@@ -101,7 +101,7 @@ export default function Hero() {
             {/* Let's Connect Button */}
             <a
               id="btn-lets-connect"
-              href="#contact"
+              href="mailto:asratulhasannahid@gmail.com"
               className="group/btn relative px-8 py-3.5 rounded-full bg-gray-950  border-gray-950 text-[#ffffff] font-space text-[15px] font-bold border  shadow-[0_4px_14px_rgba(0,0,0,0.04)] hover:bg-[#5DBF8A] hover:text-white hover:border-[#5DBF8A] transition-all duration-300 flex items-center justify-center gap-3 overflow-hidden text-center min-w-[170px]"
             >
               Let's Talk{" "}
@@ -113,7 +113,7 @@ export default function Hero() {
             {/* LinkedIn Button */}
             <a
               id="btn-linkedin"
-              href="https://linkedin.com"
+              href="https://linkedin.com/in/asratulhasannahid"
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3.5 rounded-full bg-[#5dbf8b18] border-[#5DBF8A] border-[1px] backdrop-blur-lg text-[#5DBF8A] font-space text-[15px] font-bold hover:bg-transparent hover:text-[#5DBF8A] hover:border-[#5DBF8A] transition-all duration-300 flex items-center justify-center gap-2"
