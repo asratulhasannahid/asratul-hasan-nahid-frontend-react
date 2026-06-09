@@ -145,7 +145,7 @@ export default function Header() {
 
         {/* Mobile Dropdown */}
         <div
-          className={`md:hidden rounded-t-4xl absolute top-[61px] left-0 w-full bg-white/95 backdrop-blur-lg border-b border-[#5DBF8A]/20 transition-all duration-300 ease-in-out origin-top overflow-hidden rounded-b-2xl shadow-xl ${
+          className={`md:hidden rounded-t-4xl absolute top-[61px] left-0 w-full bg-white/95 backdrop-blur-lg border-b border-[#5DBF8A]/20 transition-all duration-300 ease-in-out origin-top overflow-hidden rounded-b-2xl shadow-xl backdrop-[8px] ${
             isMobileMenuOpen
               ? "max-h-[380px] opacity-100 scale-y-100"
               : "max-h-0 opacity-0 scale-y-0 pointer-events-none"
