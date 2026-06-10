@@ -124,18 +124,9 @@ export default function Stats() {
       ref={sectionRef}
       className="relative w-full bg-[#ffffff] py-24 px-6 sm:px-12 md:px-16 overflow-hidden flex flex-col items-center justify-center border-t border-neutral-100"
     >
-      {/* Background Grid Overlay */}
-      <div className="absolute inset-0 z-0 opacity-40">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(93, 191, 139, 0.277) 1px, transparent 1px), linear-gradient(90deg, rgba(93, 191, 139, 0.277) 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
-          }}
-        ></div>
-      </div>
-
+      {/* Background Blobs */}
+      <div className="absolute top-[-10%] right-[-5%] w-[400px] h-[400px] rounded-full bg-[#5DBF8A] opacity-10 blur-[90px] blob-1 pointer-events-none"></div>
+      <div className="absolute bottom-[-10%] left-[-5%] w-[350px] h-[350px] rounded-full bg-[#5DBF8A] opacity-15 blur-[80px] blob-2 pointer-events-none"></div>
       {/* Fancy Section Header */}
       <div className="relative z-10 w-full max-w-7xl mx-auto text-center mb-12 sm:mb-12">
         <h2
