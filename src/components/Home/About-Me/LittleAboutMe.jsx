@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import aboutImage from "../../../assets/images/Nahid.jpg";
 import { ArrowRight } from "lucide-react";
+import "./LittleAboutMe.css";
 
 const LittleAboutMe = () => {
   const sectionRef = useRef(null);
@@ -26,50 +27,6 @@ const LittleAboutMe = () => {
 
   return (
     <>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Space+Grotesk:wght@700&display=swap');
-
-        .font-space-grotesk { font-family: 'Space Grotesk', sans-serif; }
-        .font-poppins { font-family: 'Poppins', sans-serif; }
-
-        /* Background Blobs */
-        .blob-1 { animation: floatY 10s ease-in-out infinite alternate; }
-        .blob-2 { animation: floatYInv 8s ease-in-out infinite alternate; }
-        
-        /* Decorative Rings */
-        .ring-cw { animation: spin-cw 15s linear infinite; }
-        .ring-ccw { animation: spin-ccw 20s linear infinite; }
-        .group:hover .ring-cw { animation-duration: 6s; }
-        .group:hover .ring-ccw { animation-duration: 8s; }
-
-        /* Glow & Image Floating */
-        .pulse-glow-anim { animation: pulse-glow 4s ease-in-out infinite; }
-        .img-float { animation: img-float 5s ease-in-out infinite alternate; }
-
-        /* Keyframes */
-        @keyframes floatY { 0% { transform: translateY(-20px); } 100% { transform: translateY(20px); } }
-        @keyframes floatYInv { 0% { transform: translateY(20px); } 100% { transform: translateY(-20px); } }
-        @keyframes spin-cw { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        @keyframes spin-ccw { 0% { transform: rotate(360deg); } 100% { transform: rotate(-360deg); } }
-        @keyframes pulse-glow { 0%, 100% { opacity: 0.08; } 50% { opacity: 0.20; } }
-        @keyframes img-float { 0% { transform: translateY(-8px); } 100% { transform: translateY(8px); } }
-
-        /* Intersection Observer Entrance Animations */
-        .initial-hidden { opacity: 0; pointer-events: none; }
-        .is-visible .initial-hidden { pointer-events: auto; }
-        .is-visible .anim-left { animation: fadeInLeft 0.7s ease-out forwards; }
-        .is-visible .anim-up { animation: fadeInUp 0.6s ease-out 0.15s forwards; }
-        .is-visible .anim-desc { animation: fadeIn 0.6s ease-out 0.3s forwards; }
-        .is-visible .anim-btn { animation: fadeInScale 0.6s ease-out 0.45s forwards; }
-        .is-visible .anim-shimmer { animation: shimmerSweep 1.5s ease-out 0.6s forwards; }
-
-        @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: translateX(0); } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes fadeInScale { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-        @keyframes shimmerSweep { 0% { background-position: 200% center; } 100% { background-position: 0% center; } }
-      `}</style>
-
       <section
         ref={sectionRef}
         className={`relative w-full py-24 md:py-32 bg-white overflow-hidden flex items-center justify-center font-poppins ${isVisible ? "is-visible" : ""}`}
@@ -120,7 +77,7 @@ const LittleAboutMe = () => {
           {/* Text Content */}
           <div className="flex flex-col items-start justify-center text-left space-y-8">
             {/* Heading */}
-            <h2 className="font-space-grotesk text-4xl md:text-5xl font-bold text-[#111827] leading-tight initial-hidden anim-up">
+            <h2 className="font-space text-4xl md:text-5xl font-bold text-[#111827] leading-tight initial-hidden anim-up">
               The Mind Behind{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#5DBF8A] to-[#4aa87a]">
                 the Work

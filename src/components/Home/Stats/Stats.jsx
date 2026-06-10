@@ -127,6 +127,35 @@ export default function Stats() {
       {/* Background Blobs */}
       <div className="absolute top-[-10%] right-[-5%] w-[400px] h-[400px] rounded-full bg-[#5DBF8A] opacity-10 blur-[90px] blob-1 pointer-events-none"></div>
       <div className="absolute bottom-[-10%] left-[-5%] w-[350px] h-[350px] rounded-full bg-[#5DBF8A] opacity-15 blur-[80px] blob-2 pointer-events-none"></div>
+
+      {/* Geometric Overlay (Centered ghost-like blueprint shape) */}
+      <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-center z-[1] opacity-[0.06] select-none pointer-events-none">
+        <svg
+          width="500"
+          height="500"
+          viewBox="0 0 100 100"
+          className="text-[#5DBF8A]"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="0.4"
+        >
+          {/* Faint elegant hexagon overlay lattice network */}
+          <polygon points="50,15 80,32.5 80,67.5 50,85 20,67.5 20,32.5" />
+          <polygon points="50,25 71,37 71,63 50,75 29,63 29,37" />
+          <polygon points="50,35 62,42 62,58 50,65 38,58 38,42" />
+          <line x1="50" y1="15" x2="50" y2="85" />
+          <line x1="20" y1="32.5" x2="80" y2="67.5" />
+          <line x1="20" y1="67.5" x2="80" y2="32.5" />
+          <circle cx="50" cy="50" r="1.5" fill="#5DBF8A" />
+          <circle cx="50" cy="15" r="1" fill="#5DBF8A" />
+          <circle cx="80" cy="32.5" r="1" fill="#5DBF8A" />
+          <circle cx="80" cy="67.5" r="1" fill="#5DBF8A" />
+          <circle cx="50" cy="85" r="1" fill="#5DBF8A" />
+          <circle cx="20" cy="67.5" r="1" fill="#5DBF8A" />
+          <circle cx="20" cy="32.5" r="1" fill="#5DBF8A" />
+        </svg>
+      </div>
+
       {/* Fancy Section Header */}
       <div className="relative z-10 w-full max-w-7xl mx-auto text-center mb-12 sm:mb-12">
         <h2
