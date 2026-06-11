@@ -32,7 +32,17 @@ export default function TechStack() {
   const sectionRef = useRef(null);
   const workspaceRef = useRef(null);
 
-  // Viewport Intersection Observer for entering viewport
+  // Constants for Infinite Grid
+  const GRID_WIDTH = 5 * 180; // 5 columns * 180px gap = 900px
+  const GRID_HEIGHT = 4 * 130; // 4 rows * 130px gap = 520px
+
+  // Magic function: Wraps coordinates infinitely
+  const wrapCoordinate = (val, max) => {
+    const half = max / 2;
+    return ((((val + half) % max) + max) % max) - half;
+  };
+
+  // Viewport Intersection Observer
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -51,33 +61,26 @@ export default function TechStack() {
     }
 
     return () => {
-      if (currentSection) {
-        observer.unobserve(currentSection);
-      }
+      if (currentSection) observer.unobserve(currentSection);
     };
   }, [hasIntersected]);
 
-  // Infinite slow auto-slide movement loop when not dragging or hovering
+  // Infinite slow auto-slide movement loop
   useEffect(() => {
-    const driftSpeed = 0.0008; // Ultra slow majestic float speed
-    const amplitudeX = 140; // Horizontal auto drift range
-    const amplitudeY = 90; // Vertical auto drift range
+    const driftSpeed = 0.0008;
 
     const startAutoDrift = () => {
-      if (isDragging || activeHoverIndex !== null) {
-        return;
-      }
+      if (isDragging || activeHoverIndex !== null) return;
+
       autoTimeRef.current += 1.3;
 
-      // Calculate dynamic automatic cosmic hover pan coordinates
-      const targetAutoX =
-        Math.sin(autoTimeRef.current * driftSpeed) * amplitudeX;
-      const targetAutoY =
-        Math.cos(autoTimeRef.current * driftSpeed * 1.4) * amplitudeY;
+      // Changed from Absolute Target to Relative Velocity for Infinite Pan
+      const velocityX = Math.cos(autoTimeRef.current * driftSpeed) * 0.3;
+      const velocityY = Math.sin(autoTimeRef.current * driftSpeed * 1.4) * 0.3;
 
       setPanOffset((prev) => ({
-        x: prev.x + (targetAutoX - prev.x) * 0.02,
-        y: prev.y + (targetAutoY - prev.y) * 0.02,
+        x: prev.x + velocityX,
+        y: prev.y + velocityY,
       }));
     };
 
@@ -95,44 +98,35 @@ export default function TechStack() {
     };
   }, [isDragging, activeHoverIndex]);
 
-  // Drag start handler - Mouse or Touch
+  // Drag start handler
   const handleDragStart = (clientX, clientY) => {
     setIsDragging(true);
     dragStart.current = { x: clientX, y: clientY };
     elementStart.current = { x: panOffset.x, y: panOffset.y };
   };
 
-  // Drag movement tracker with smooth spherical limits
+  // Drag movement tracker (Removed Circular Limits for Infinite Pan)
   const handleDragMove = (clientX, clientY) => {
     if (!isDragging) return;
     const deltaX = clientX - dragStart.current.x;
     const deltaY = clientY - dragStart.current.y;
 
-    const limitRadius = 550;
-    let targetX = elementStart.current.x + deltaX;
-    let targetY = elementStart.current.y + deltaY;
-
-    // Constrain inside smooth circular outer bounds
-    const dist = Math.sqrt(targetX * targetX + targetY * targetY);
-    if (dist > limitRadius) {
-      const angle = Math.atan2(targetY, targetX);
-      targetX = Math.cos(angle) * limitRadius;
-      targetY = Math.sin(angle) * limitRadius;
-    }
-
-    setPanOffset({ x: targetX, y: targetY });
+    // No radius limit! Drag as far as you want.
+    setPanOffset({
+      x: elementStart.current.x + deltaX,
+      y: elementStart.current.y + deltaY,
+    });
   };
 
   const handleDragEnd = () => {
     setIsDragging(false);
   };
 
-  // Global mousemove/mouseup listener for perfect window-drag tracking
+  // Global mousemove/mouseup listener
   useEffect(() => {
     const handleGlobalMouseMove = (e) => {
       handleDragMove(e.clientX, e.clientY);
     };
-
     const handleGlobalMouseUp = () => {
       handleDragEnd();
     };
@@ -148,33 +142,16 @@ export default function TechStack() {
     };
   }, [isDragging, panOffset]);
 
-  const handleRecenter = () => {
-    setPanOffset({ x: 0, y: 0 });
-    autoTimeRef.current = 0;
-  };
-
-  // Dynamic mesh grid coordinates calculation (connect horizontal, vertical, and diagonals)
+  // Edge Connection Map
   const edges = [];
   for (let i = 0; i < technologies.length; i++) {
     const col = i % 5;
     const row = Math.floor(i / 5);
 
-    // Right neighbor connection
-    if (col < 4) {
-      edges.push({ fromIdx: i, toIdx: i + 1 });
-    }
-    // Bottom neighbor connection
-    if (row < 3) {
-      edges.push({ fromIdx: i, toIdx: i + 5 });
-    }
-    // Diagonal bottom-right connection
-    if (col < 4 && row < 3) {
-      edges.push({ fromIdx: i, toIdx: i + 6 });
-    }
-    // Diagonal bottom-left connection
-    if (col > 0 && row < 3) {
-      edges.push({ fromIdx: i, toIdx: i + 4 });
-    }
+    if (col < 4) edges.push({ fromIdx: i, toIdx: i + 1 });
+    if (row < 3) edges.push({ fromIdx: i, toIdx: i + 5 });
+    if (col < 4 && row < 3) edges.push({ fromIdx: i, toIdx: i + 6 });
+    if (col > 0 && row < 3) edges.push({ fromIdx: i, toIdx: i + 4 });
   }
 
   return (
@@ -183,7 +160,7 @@ export default function TechStack() {
       ref={sectionRef}
       className="relative w-full bg-[#ffffff] py-24 px-4 sm:px-8 overflow-hidden flex flex-col items-center justify-center border-t border-neutral-100/60 select-none"
     >
-      {/* Background Grid Overlay */}
+      {/* Background Grids & Blobs Remain Unchanged */}
       <div className="absolute inset-0 z-0 opacity-40">
         <div
           className="absolute inset-0"
@@ -194,9 +171,7 @@ export default function TechStack() {
           }}
         ></div>
       </div>
-      {/* Gradient Blurry Blobs Background */}
       <div className="hero-bg-blur">
-        {/* Top Left Blob - Extended */}
         <div
           className="hero-gradient-blob bg-blob-1"
           style={{
@@ -208,20 +183,17 @@ export default function TechStack() {
               "radial-gradient(circle at 25% 25%, rgba(93, 191, 138, 0.5), rgba(93, 191, 138, 0.15) 35%, transparent 70%)",
           }}
         ></div>
-        {/* Top Right Blob - Extended */}
         <div
           className="hero-gradient-blob bg-blob-2"
           style={{
             top: "25%",
             right: "-15%",
-            left: "auto",
             width: "550px",
             height: "550px",
             background:
               "radial-gradient(circle at 50% 50%, rgba(93, 191, 138, 0.4), rgba(93, 191, 138, 0.12) 40%, transparent 70%)",
           }}
         ></div>
-        {/* Middle Blob - New */}
         <div
           className="hero-gradient-blob bg-blob-4"
           style={{
@@ -234,13 +206,11 @@ export default function TechStack() {
               "radial-gradient(circle at 50% 50%, rgba(93, 191, 138, 0.35), rgba(93, 191, 138, 0.1) 35%, transparent 70%)",
           }}
         ></div>
-        {/* Bottom Left Blob - Extended */}
         <div
           className="hero-gradient-blob bg-blob-3"
           style={{
             bottom: "-20%",
             left: "15%",
-            top: "auto",
             width: "650px",
             height: "650px",
             background:
@@ -249,11 +219,8 @@ export default function TechStack() {
         ></div>
       </div>
 
-      {/* Section Header */}
       <div
-        className={`relative z-10 w-full max-w-6xl mx-auto text-center mb-10 pointer-events-auto ${
-          hasIntersected ? "animate-tech-header" : "opacity-0"
-        }`}
+        className={`relative z-10 w-full max-w-6xl mx-auto text-center mb-10 pointer-events-auto ${hasIntersected ? "anim-fade-up" : "opacity-0"}`}
       >
         <h2 className="font-space font-bold text-4xl md:text-5xl text-[#111827] mb-4">
           <span className="relative inline-block">
@@ -270,11 +237,6 @@ export default function TechStack() {
         </p>
       </div>
 
-      {/* 
-        Interactive Cosmic Sphere Viewport
-        - Clean pure background with circular layout fading.
-        - Circular viewport mask so cards emerge from depth of the outer circle gracefully.
-      */}
       <div
         ref={workspaceRef}
         id="tech-workspace-container"
@@ -284,41 +246,29 @@ export default function TechStack() {
           handleDragStart(e.clientX, e.clientY);
         }}
         onTouchStart={(e) => {
-          if (e.touches.length > 0) {
+          if (e.touches.length > 0)
             handleDragStart(e.touches[0].clientX, e.touches[0].clientY);
-          }
         }}
         onTouchMove={(e) => {
-          if (e.touches.length > 0) {
+          if (e.touches.length > 0)
             handleDragMove(e.touches[0].clientX, e.touches[0].clientY);
-          }
         }}
         onTouchEnd={handleDragEnd}
-        className={`relative z-10 w-full max-w-6xl h-[500px] rounded-full select-none interactive-space-dots transition-shadow duration-300 mx-auto ${
-          isDragging ? "cursor-grabbing" : "cursor-grab"
-        }`}
+        className={`relative z-10 w-full max-w-6xl h-[500px] rounded-full select-none interactive-space-dots transition-all duration-800 mx-auto ${isDragging ? "cursor-grabbing" : "cursor-grab"} ${hasIntersected ? "anim-fade-up" : "opacity-0"}`}
         style={{
+          animationDelay: "0.15s",
           maskImage:
             "radial-gradient(circle, rgba(0,0,0,1) 55%, rgba(0,0,0,0.15) 85%, rgba(0,0,0,0) 100%)",
           WebkitMaskImage:
             "radial-gradient(circle, rgba(0,0,0,1) 55%, rgba(0,0,0,0.15) 85%, rgba(0,0,0,0) 100%)",
         }}
       >
-        {/* Infinite dynamic panned canvas panel */}
-        <div
-          className="absolute inset-0 w-full h-full flex items-center justify-center pointer-events-none"
-          style={{
-            transform: `translate3d(${panOffset.x}px, ${panOffset.y}px, 0)`,
-            transition: isDragging
-              ? "none"
-              : "transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
-          }}
-        >
-          {/* Spatial placements map of all 20 technologies */}
+        {/* Important: Removed transform property from this wrapper so cards pan independently */}
+        <div className="absolute inset-0 w-full h-full flex items-center justify-center pointer-events-none">
           <div className="relative w-[900px] h-[500px] pointer-events-auto">
-            {/* Interactive Grid Connection Lines Vector Map Layer */}
+            {/* SVG Lines rendering with Wrapped Coordinates */}
             <svg
-              className="absolute inset-0 w-full h-full pointer-events-none overflow-visible transition-colors duration-300"
+              className="absolute inset-0 w-full h-full pointer-events-none overflow-visible"
               style={{ zIndex: 5 }}
             >
               {edges.map((edge, idx) => {
@@ -327,15 +277,33 @@ export default function TechStack() {
                 const toCol = edge.toIdx % 5;
                 const toRow = Math.floor(edge.toIdx / 5);
 
-                const x1 = (fromCol - 2) * 180 + 450;
-                const y1 = (fromRow - 1.5) * 130 + 250;
-                const x2 = (toCol - 2) * 180 + 450;
-                const y2 = (toRow - 1.5) * 130 + 250;
+                const rawX1 = (fromCol - 2) * 180;
+                const rawY1 = (fromRow - 1.5) * 130;
+                const rawX2 = (toCol - 2) * 180;
+                const rawY2 = (toRow - 1.5) * 130;
 
-                // Dynamic calculations of distance for each endpoint to calculate active network opacities
-                // This ensures connections fade out simultaneously with the sphere edge cards!
-                const midX = (x1 + x2) / 2 - 450 + panOffset.x;
-                const midY = (y1 + y2) / 2 - 250 + panOffset.y;
+                // Wrap endpoints
+                const wrapX1 = wrapCoordinate(rawX1 + panOffset.x, GRID_WIDTH);
+                const wrapY1 = wrapCoordinate(rawY1 + panOffset.y, GRID_HEIGHT);
+                const wrapX2 = wrapCoordinate(rawX2 + panOffset.x, GRID_WIDTH);
+                const wrapY2 = wrapCoordinate(rawY2 + panOffset.y, GRID_HEIGHT);
+
+                // If one point wraps to the other side, don't draw the line across the screen!
+                if (
+                  Math.abs(wrapX1 - wrapX2) > 200 ||
+                  Math.abs(wrapY1 - wrapY2) > 150
+                ) {
+                  return null;
+                }
+
+                // Adjust zero-center back to SVG coords (450, 250 is center of 900x500 box)
+                const x1 = wrapX1 + 450;
+                const y1 = wrapY1 + 250;
+                const x2 = wrapX2 + 450;
+                const y2 = wrapY2 + 250;
+
+                const midX = wrapX1;
+                const midY = wrapY1;
                 const dist = Math.sqrt(midX * midX + midY * midY);
 
                 const maxRadiusLimit = 450;
@@ -349,11 +317,8 @@ export default function TechStack() {
                   );
                   lineOpacity = Math.max(0, 1 * (1 - ratio));
                 }
-                if (dist > maxRadiusLimit) {
-                  lineOpacity = 0;
-                }
+                if (dist > maxRadiusLimit) lineOpacity = 0;
 
-                // Node Hover Highlight - When either endpoints of this edge is hovered!
                 const isHoveredEdge =
                   activeHoverIndex === edge.fromIdx ||
                   activeHoverIndex === edge.toIdx;
@@ -386,25 +351,19 @@ export default function TechStack() {
             </svg>
 
             {technologies.map((tech, index) => {
-              // Row and Column coordinates spread across high-density spherical orbits
               const col = index % 5;
               const row = Math.floor(index / 5);
 
-              // Spacing offsets representing natural grid cells
               const baseX = (col - 2) * 180;
               const baseY = (row - 1.5) * 130;
 
-              // Calculate distance to viewport center in real time
-              const visualX = baseX + panOffset.x;
-              const visualY = baseY + panOffset.y;
+              // Here is the infinite wrapping magic for individual items!
+              const visualX = wrapCoordinate(baseX + panOffset.x, GRID_WIDTH);
+              const visualY = wrapCoordinate(baseY + panOffset.y, GRID_HEIGHT);
+
               const distanceFromCenter = Math.sqrt(
                 visualX * visualX + visualY * visualY,
               );
-
-              // Circular spherical lens scaling transitions:
-              // At center (0 - 120px radius): Full standard size.
-              // Toward outer borders (120px - 450px radius): Scales down to tiny as it fades backwards.
-              // Over 450px radius: Fully invisible & non-interactive (behind-the-scenes).
               const maxRadiusLimit = 450;
               const lensCore = 120;
 
@@ -416,11 +375,10 @@ export default function TechStack() {
                   1,
                   (distanceFromCenter - lensCore) / (maxRadiusLimit - lensCore),
                 );
-                dynamicScale = 1 - ratio * 0.75; // down to 0.25 scale
-                dynamicOpacity = 1 - ratio * 0.95; // down to 0.05 opacity
+                dynamicScale = 1 - ratio * 0.75;
+                dynamicOpacity = 1 - ratio * 0.95;
               }
 
-              // Fully hide if beyond limits
               if (distanceFromCenter > maxRadiusLimit) {
                 dynamicScale = 0.15;
                 dynamicOpacity = 0;
@@ -428,12 +386,6 @@ export default function TechStack() {
 
               const isAnyDimmed = activeHoverIndex !== null;
               const isThisHovered = activeHoverIndex === index;
-              const hasImageError = imageErrors[tech.name];
-
-              const floatClass = `animate-mini-float-${index % 5}`;
-              const delayIncr = index * 0.035;
-
-              // Hover magnification settings
               const finalScale = isThisHovered ? 1.14 : dynamicScale;
               const finalOpacity = isThisHovered
                 ? 1.0
@@ -449,37 +401,26 @@ export default function TechStack() {
                   style={{
                     left: "50%",
                     top: "50%",
-                    marginLeft: "-60px", // Half of box width (120px)
-                    marginTop: "-50px", // Half of new box height (100px)
-                    transform: `translate3d(${baseX}px, ${baseY}px, 0)`,
+                    marginLeft: "-60px",
+                    marginTop: "-50px",
+                    // Item specific transform coordinates to allow infinite jumping
+                    transform: `translate3d(${visualX}px, ${visualY}px, 0)`,
                     opacity: hasIntersected ? finalOpacity : 0,
-                    transition: isDragging
-                      ? "opacity 0.25s ease-out"
-                      : "opacity 0.45s ease-out",
+                    transition: isDragging ? "none" : "opacity 0.45s ease-out",
                     zIndex: isThisHovered
                       ? 50
                       : Math.round(10 - distanceFromCenter / 40) + 10,
                     pointerEvents: isInteractable ? "auto" : "none",
                   }}
-                  onMouseEnter={() => {
-                    if (isInteractable) setActiveHoverIndex(index);
-                  }}
-                  onMouseLeave={() => {
-                    setActiveHoverIndex(null);
-                  }}
+                  onMouseEnter={() =>
+                    isInteractable && setActiveHoverIndex(index)
+                  }
+                  onMouseLeave={() => setActiveHoverIndex(null)}
                 >
-                  {/* Floating rhythmic float movement */}
                   <div
-                    className={`${isDragging ? "" : floatClass}`}
-                    style={{
-                      animationDelay: `${(index % 5) * 0.25}s`,
-                    }}
+                    className={`${isDragging ? "" : `animate-mini-float-${index % 5}`}`}
+                    style={{ animationDelay: `${(index % 5) * 0.25}s` }}
                   >
-                    {/* 
-                      Rectangular Tech Skill Box (EXACTLY 120px x 100px) 
-                      - Border-left accent line completely removed.
-                      - Extra-soft deeply blurred green shadows.
-                    */}
                     <div
                       className={`relative w-[120px] h-[100px] flex flex-col justify-between items-center p-3.5 rounded-2xl border bg-white/95 backdrop-blur-[7px] transition-all duration-300 ease-out select-none ${
                         isThisHovered
@@ -492,46 +433,35 @@ export default function TechStack() {
                           "transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, shadow 0.25s ease",
                       }}
                     >
-                      {/* Top Skill Logo Brand Image */}
                       <div className="flex-1 flex items-center justify-center w-full max-h-[55%]">
-                        {
-                          <img
-                            src={tech.imageUrl}
-                            alt={`${tech.name} icon`}
-                            referrerPolicy="no-referrer"
-                            className="w-10 h-10 object-contain select-none transition-transform duration-300 pointer-events-none animate-none"
-                            style={{
-                              filter: isThisHovered
-                                ? "brightness(1.1) contrast(1.02)"
-                                : "none",
-                            }}
-                            onError={() => {
-                              setImageErrors((prev) => ({
-                                ...prev,
-                                [tech.name]: true,
-                              }));
-                            }}
-                          />
-                        }
+                        <img
+                          src={tech.imageUrl}
+                          alt={`${tech.name} icon`}
+                          referrerPolicy="no-referrer"
+                          className="w-10 h-10 object-contain select-none transition-transform duration-300 pointer-events-none"
+                          style={{
+                            filter: isThisHovered
+                              ? "brightness(1.1) contrast(1.02)"
+                              : "none",
+                          }}
+                          onError={() =>
+                            setImageErrors((prev) => ({
+                              ...prev,
+                              [tech.name]: true,
+                            }))
+                          }
+                        />
                       </div>
-
-                      {/* Bottom Text Name */}
                       <div className="w-full text-center pb-0.5">
                         <span
-                          className={`block font-poppins text-[11px] font-semibold tracking-wide transition-colors duration-300 pointer-events-none truncate ${
-                            isThisHovered ? "text-[#5DBF8A]" : "text-[#1F2937]"
-                          }`}
+                          className={`block font-poppins text-[11px] font-semibold tracking-wide transition-colors duration-300 pointer-events-none truncate ${isThisHovered ? "text-[#5DBF8A]" : "text-[#1F2937]"}`}
                         >
                           {tech.name}
                         </span>
                       </div>
-
-                      {/* Hover subtle radial glow */}
                       <div
                         className="absolute inset-0 rounded-2xl bg-radial from-[#5DBF8A]/10 via-transparent to-transparent -z-10 transition-opacity duration-300 pointer-events-none"
-                        style={{
-                          opacity: isThisHovered ? 1 : 0,
-                        }}
+                        style={{ opacity: isThisHovered ? 1 : 0 }}
                       />
                     </div>
                   </div>
@@ -542,13 +472,14 @@ export default function TechStack() {
         </div>
       </div>
 
-      {/* Philosophy Cards */}
+      {/* Philosophy Cards Section (Unchanged) */}
       <div className="relative z-10 w-full max-w-6xl mx-auto mt-16 grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
         {/* Card 1 */}
         <div
           key="philosophy-card-1"
-          className="group relative bg-white rounded-xl p-6 md:p-8 shadow-sm border border-[rgba(93,191,138,0.15)] overflow-hidden transition-all duration-500 ease-out"
+          className={`group relative bg-white rounded-xl p-6 md:p-8 shadow-sm border border-[rgba(93,191,138,0.15)] overflow-hidden transition-all duration-500 ease-out ${hasIntersected ? "anim-fade-up" : "opacity-0"}`}
           style={{
+            animationDelay: "0.3s",
             transform:
               hoveredPhilosophyCard === "philosophy-card-1"
                 ? "translateY(-6px) scale(1.01)"
@@ -623,8 +554,9 @@ export default function TechStack() {
         {/* Card 2 */}
         <div
           key="philosophy-card-2"
-          className="group relative bg-white rounded-xl p-6 md:p-8 shadow-sm border border-[rgba(93,191,138,0.15)] overflow-hidden transition-all duration-500 ease-out"
+          className={`group relative bg-white rounded-xl p-6 md:p-8 shadow-sm border border-[rgba(93,191,138,0.15)] overflow-hidden transition-all duration-500 ease-out ${hasIntersected ? "anim-fade-up" : "opacity-0"}`}
           style={{
+            animationDelay: "0.45s",
             transform:
               hoveredPhilosophyCard === "philosophy-card-2"
                 ? "translateY(-6px) scale(1.01)"
