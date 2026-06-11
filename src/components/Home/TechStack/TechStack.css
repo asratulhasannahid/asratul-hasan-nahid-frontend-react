@@ -1,0 +1,156 @@
+/* Header entrance fade up */
+.animate-tech-header {
+  opacity: 0;
+  animation: techFadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes techFadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Interactive Keep Shimmer Sweep */
+@keyframes techShimmerSweep {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.highlight-shimmer-keep {
+  background: linear-gradient(
+    120deg,
+    #5dbf8a 0%,
+    #158b54 35%,
+    #a6ffd3 48%,
+    #ffffff 52%,
+    #5dbf8a 65%,
+    #0e7443 100%
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  background-position: 100% 0;
+}
+
+.trigger-keep-shimmer {
+  animation: techShimmerSweep 1.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  animation-delay: 0.5s;
+}
+
+/* Spatial Background Blobs Floating keys */
+@keyframes techFloatBlob1 {
+  0% {
+    transform: translateY(-20px) scale(0.96);
+  }
+  100% {
+    transform: translateY(20px) scale(1.04);
+  }
+}
+@keyframes techFloatBlob2 {
+  0% {
+    transform: translateY(20px) scale(1.03);
+  }
+  100% {
+    transform: translateY(-20px) scale(0.97);
+  }
+}
+@keyframes techFloatBlob3 {
+  0% {
+    transform: translateY(-15px) scale(0.98);
+  }
+  100% {
+    transform: translateY(15px) scale(1.02);
+  }
+}
+
+.animate-tech-blob-1 {
+  animation: techFloatBlob1 10s ease-in-out infinite alternate;
+}
+.animate-tech-blob-2 {
+  animation: techFloatBlob2 12s ease-in-out infinite alternate-reverse;
+}
+.animate-tech-blob-3 {
+  animation: techFloatBlob3 9s ease-in-out infinite alternate;
+}
+
+/* Gentle idle floating cycles assigned per node series */
+@keyframes miniBreathing {
+  0% {
+    transform: translateY(-4px);
+  }
+  100% {
+    transform: translateY(4px);
+  }
+}
+
+.animate-mini-float-0 {
+  animation: miniBreathing 3.4s ease-in-out infinite alternate;
+}
+.animate-mini-float-1 {
+  animation: miniBreathing 4.3s ease-in-out infinite alternate;
+}
+.animate-mini-float-2 {
+  animation: miniBreathing 3.7s ease-in-out infinite alternate;
+}
+.animate-mini-float-3 {
+  animation: miniBreathing 4.8s ease-in-out infinite alternate;
+}
+.animate-mini-float-4 {
+  animation: miniBreathing 4s ease-in-out infinite alternate;
+}
+
+@keyframes cardRevealAnimation {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.card-initial-entrance {
+  opacity: 0;
+  animation: cardRevealAnimation 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Seamless blueprint circular dot coordinates pattern */
+.interactive-space-dots {
+  background-size: 20px 20px;
+  background-image: radial-gradient(
+    circle,
+    rgba(93, 191, 138, 0.05) 1.1px,
+    transparent 1.1px
+  );
+}
+
+/* Dashboard futuristic network connections pulses animation */
+@keyframes neuralFlow {
+  0% {
+    stroke-dashoffset: 40;
+    stroke: rgba(93, 191, 138, 0.15);
+  }
+  50% {
+    stroke: rgba(93, 191, 138, 0.45);
+  }
+  100% {
+    stroke-dashoffset: 0;
+    stroke: rgba(93, 191, 138, 0.15);
+  }
+}
+
+.neural-link-animated {
+  animation: neuralFlow 3.2s linear infinite;
+}
