@@ -77,7 +77,7 @@ const LittleAboutMe = () => {
           {/* Text Content */}
           <div className="flex flex-col items-start justify-center text-left space-y-8">
             {/* Heading */}
-            <h2 className="font-space text-4xl md:text-5xl font-bold text-[#111827] leading-tight initial-hidden anim-up">
+            <h2 className="font-space text-4xl md:text-[52px] font-bold text-[#111827] leading-tight initial-hidden anim-up">
               The Mind Behind{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#5DBF8A] to-[#4aa87a]">
                 the Work

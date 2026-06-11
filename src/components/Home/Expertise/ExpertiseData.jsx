@@ -3,13 +3,12 @@ import {
   Code,
   Zap,
   Sparkles,
-  Cpu,
   Database,
   ShoppingCart,
   Layout,
-  FileText,
   Box,
-  Smartphone,
+  Server,
+  HardDrive,
 } from "lucide-react";
 
 export const expertiseData = [
@@ -39,27 +38,32 @@ export const expertiseData = [
     ],
   },
   {
+    title: "Backend Development",
+    cards: [
+      {
+        title: "Server & API Development",
+        desc: "Node.js and Express.js for building server side logic, RESTful API design with clean route structure, middleware setup, authentication and authorization flows, error handling and request validation, connecting frontend interfaces to real data sources",
+        icon: <Server className="w-6 h-6" />,
+      },
+      {
+        title: "Database & Infrastructure",
+        desc: "MongoDB for flexible document based data storage, PostgreSQL for structured relational data, Prisma ORM for type safe database queries and migrations, Docker for containerized development environments, basic deployment setup and environment configuration",
+        icon: <HardDrive className="w-6 h-6" />,
+      },
+    ],
+  },
+  {
     title: "WordPress",
     cards: [
       {
-        title: "Page Builders",
-        desc: "Elementor Pro with custom widgets and dynamic data, Bricks Builder with custom elements and query loops, Gutenberg with custom blocks and block patterns, Divi with custom modules and theme builder layouts",
+        title: "Page Builders & Custom Functionality",
+        desc: "Elementor Pro, Bricks Builder, Gutenberg and Divi with custom widgets, blocks, query loops and theme builder layouts, Custom Post Types, Advanced Custom Fields, hooks and filters, functions.php logic, shortcodes and plugin integration",
         icon: <Layout className="w-6 h-6" />,
       },
       {
-        title: "Custom Functionality",
-        desc: "Custom Post Types, Advanced Custom Fields, WordPress hooks and filters, functions.php logic, shortcodes, custom REST endpoints, plugin integration",
-        icon: <Cpu className="w-6 h-6" />,
-      },
-      {
-        title: "WooCommerce",
-        desc: "Custom product page layouts, cart and checkout template overrides, order management customization, WooCommerce hooks for store-level control",
+        title: "WooCommerce & CMS Structure",
+        desc: "Custom product page layouts, cart and checkout template overrides, WooCommerce hooks for store control, user role and permission management, structured content architecture for editors, clean backend experience for non-technical users",
         icon: <ShoppingCart className="w-6 h-6" />,
-      },
-      {
-        title: "CMS & Content Structure",
-        desc: "User role and permission management, custom admin dashboard setup, structured content architecture for editors, clean backend experience for non-technical users",
-        icon: <FileText className="w-6 h-6" />,
       },
     ],
   },
@@ -67,24 +71,15 @@ export const expertiseData = [
     title: "Shopify",
     cards: [
       {
-        title: "Theme Development",
-        desc: "Liquid templating from the ground up, custom theme without starter kits, Dawn-based builds with heavy customization, theme architecture planning before writing a line",
+        title: "Custom Theme & Sections",
+        desc: "Theme Development from the ground up including custom Dawn builds and architecture planning. Building schema driven Custom Section Blocks with merchant editable settings and dynamic rendering for non technical store owners.",
         icon: <Box className="w-6 h-6" />,
       },
+
       {
-        title: "Custom Sections & Blocks",
-        desc: "Schema-driven sections with merchant-editable settings, dynamic blocks with conditional rendering, settings panel built for non-technical store owners, reusable section patterns across templates",
-        icon: <Layers className="w-6 h-6" />,
-      },
-      {
-        title: "Metafields & Data Layer",
-        desc: "Product and collection metafields, metaobjects for structured repeatable content, dynamic content binding across storefront templates, data-driven UI without hardcoding",
+        title: "Storefront & Data Layer",
+        desc: "Utilizing product metafields and a robust data layer for dynamic content binding without hardcoding. Building fast mobile first storefront layouts with slide out carts collection filtering and performance tuning.",
         icon: <Database className="w-6 h-6" />,
-      },
-      {
-        title: "Storefront & UX",
-        desc: "Slide-out cart drawer, collection filtering logic, product page performance tuning, mobile-first storefront layouts, fast load times with clean Liquid output",
-        icon: <Smartphone className="w-6 h-6" />,
       },
     ],
   },

@@ -21,7 +21,7 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navItems = ["Home", "About Me", "Expertise", "Projects", "Articles"];
+  const navItems = ["Home", "About Me", "Expertise", "How I Build", "Articles"];
 
   return (
     <header>
